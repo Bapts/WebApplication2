@@ -1,0 +1,86 @@
+﻿@model WebApplication2.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Authors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Authors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastChapter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastChapter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastModificationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastModificationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrontImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrontImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookId }) |
+    @Html.ActionLink("Back to List", "Index") 
+    @if (Request.IsAuthenticated)
+    {
+        @Html.ActionLink(" | Ajouter un chapitre", "Create", "Chapters", new { id = Model.BookId }, null)
+    }
+</p>

@@ -1,0 +1,74 @@
+﻿@model WebApplication2.Models.Chapter
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Chapter</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChapterNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChapterNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatorId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatorId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpVote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpVote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DownVote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DownVote)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
