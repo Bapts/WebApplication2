@@ -1,8 +1,13 @@
-﻿@model WebApplication2.Models.Chapter
+﻿@using System.Web.UI.WebControls
+@using WebApplication2.Models
+@model WebApplication2.Models.ChapterBookController
 
 @{
     ViewBag.Title = "Creation de chapitre";
+    var books = Model.BooksList;
+    var listItems = new SelectList(books, "BookId", "Title");
 
+    //var listItems = books.Select(book => new ListItem(book.Title, book.Title));
 }
 
 <h2>@ViewBag.Title</h2>
@@ -10,35 +15,76 @@
 @using (Html.BeginForm())
 {
     <script type="text/javascript">
+        $(function () {
+            $("#NeedToBeConnectedButton").click(function (event) {
+                alert("test");
+            });
+        });
         console.log(window.location.search());
+        function clickButton() {
+            BootstrapDialog.show({
+                title: 'Attention',
+                message: 'Vous devez etre connecter pour creer un livre.',
+                buttons: [{
+                    label: 'Se connecter',
+                    action: function (dialog) {
+                        window.location.href = "/Account/Login";
+                    }
+                }, {
+                    label: 'Creer un compte',
+                    action: function (dialog) {
+                        window.location.href = "/Account/Register";
+                    }
+                }, {
+                    label: 'Fermer',
+                    action: function (dialog) {
+                        dialog.close();
+                    }
+                }]
+            });
+        }
         function OnChangeEvent() {
             var str = document.getElementById("ContentId").value;
-            document.getElementById("CountWord").value = str.replace(/\s+/g,' ').trim().split(' ').length;
+            document.getElementById("CountWord").value = str.replace(/\s+/g, ' ').replace(/'/g, ' ').trim().split(' ').length;
         }
     </script>
     @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
         <h4>Chapitre</h4>
+       
+        @Html.DropDownListFor(model => model.Chapter.BookId, listItems, "-- Choisir Livre --", new {@class = "form-control"})
+
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Chapter.Content, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-2">
-                @Html.TextAreaFor(model => model.Content, htmlAttributes: new { @id = "ContentId", @onkeyup = "OnChangeEvent();", @class = "form-control TextAreaChapter"});
+                @Html.TextAreaFor(model => model.Chapter.Content, htmlAttributes: new { @id = "ContentId", @onkeyup = "OnChangeEvent();", @class = "form-control TextAreaChapter"});
                 <h4>Nombre de mot: </h4>
                 <input type="number" id="CountWord" min="0" disabled="disabled" value="0" style="text-align: center">
-                @Html.TextBoxFor(model => model.BookId, new { @Value = @Model.BookId, @hidden = "hidden"})
+                @Html.TextBoxFor(model => model.Chapter.BookId, new { @Value = @Model.Chapter.BookId, @hidden = "hidden"})
                 
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Createe" class="btn btn-default" />
+        @if (Request.IsAuthenticated)
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
-        </div>
+        }
+        @if (!Request.IsAuthenticated)
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button id="NeedToBeConnectedButton" onclick="clickButton()" class="btn btn-default" type="button">Create</button>
+                </div>
+            </div>
+        }
+
     </div>
 }
 

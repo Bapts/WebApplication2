@@ -289,6 +289,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-dialog.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -302,13 +303,19 @@
     <Content Include="Images\téléchargement.jpg" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="Scripts\bootstrap-dialog.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\bootstrap-dialog.less" />
     <None Include="Properties\PublishProfiles\mybeautifulnovel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\eflexis\eflexis.dialog.js" />
+    <Content Include="Scripts\eflexis\eflexis.dialog.min.js" />
+    <Content Include="Scripts\eflexis\jquery.eflexis.dialog.js" />
+    <Content Include="Scripts\eflexis\jquery.eflexis.dialog.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -372,6 +379,7 @@
     <Content Include="Views\Chapters\Details.cshtml" />
     <Content Include="Views\Chapters\Edit.cshtml" />
     <Content Include="Views\Chapters\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,12 +11,12 @@
     @Html.AntiForgeryToken()
     <h4>Créer un nouveau compte.</h4>
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
     //Nom
     <div class="form-group">
         @Html.LabelFor(m => m.LastName, new {@class = "col-md-2 control-label"})
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.LastName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
         </div>
     </div>
     //Prenom
@@ -24,6 +24,7 @@
         @Html.LabelFor(m => m.FirstName, new {@class = "col-md-2 control-label"})
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "text-danger" })
         </div>
     </div>
     //Pseudo
@@ -31,6 +32,7 @@
         @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "text-danger" })
         </div>
     </div>
     //Email
@@ -38,6 +40,7 @@
         @Html.LabelFor(m => m.Email, new {@class = "col-md-2 control-label"})
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
         </div>
     </div>
     //Password
@@ -45,6 +48,7 @@
         @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
         <div class="col-md-10">
             @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
         </div>
     </div>
     //ConfirmPassword
@@ -52,15 +56,17 @@
         @Html.LabelFor(m => m.ConfirmPassword, new {@class = "col-md-2 control-label"})
         <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @class = "text-danger" })
         </div>
     </div>
 
     //Gender Homme = 1 Femme = 2
     <div class="form-group">
-        @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             Homme: @Html.RadioButton("Gender", 1)
             Femme: @Html.RadioButton("Gender", 2)
+            @Html.ValidationMessageFor(m => m.Gender, null, new { @class = "text-danger" })
         </div>
     </div>
 
@@ -68,7 +74,8 @@
     <div class="form-group">
         @Html.LabelFor(m => m.BirthDate, new {@class = "col-md-2 control-label"})
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.BirthDate, new {@class = "form-control"})
+            @Html.TextBoxFor(m => m.BirthDate, new {@class = "form-control", type = "date"})
+            @Html.ValidationMessageFor(m => m.BirthDate, null, new { @class = "text-danger" })
         </div>
     </div>
 
@@ -77,6 +84,7 @@
         @Html.LabelFor(m => m.City, new {@class = "col-md-2 control-label"})
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.City, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.City, null, new { @class = "text-danger" })
         </div>
     </div>
 
@@ -92,4 +100,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
 }

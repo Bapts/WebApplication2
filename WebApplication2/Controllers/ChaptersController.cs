@@ -41,10 +41,12 @@ namespace WebApplication2.Controllers
         // GET: Chapters/Create/5
         public ActionResult Create(int? id)
         {
+            var viewModel = new ChapterBookController();
             if (id != null)
                 _bookId = (int) id;
-            var model = new Chapter {BookId = _bookId};
-            return View(model);
+            viewModel.Chapter = new Chapter {BookId = _bookId};
+            viewModel.BooksList = db.Books.ToList();
+            return View(viewModel);
         }
 
         // POST: Chapters/Create
@@ -54,7 +56,6 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Chapter chapter)
         {
-            var param = Request.QueryString["id"];
             chapter = InitChapter(chapter);
             if (ModelState.IsValid)
             {

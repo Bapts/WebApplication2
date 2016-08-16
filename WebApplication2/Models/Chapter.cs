@@ -7,12 +7,19 @@ using System.Web;
 
 namespace WebApplication2.Models
 {
+    public class ChapterBookController
+    {
+        public Chapter Chapter { get; set; }
+        public List<Book> BooksList { get; set; }
+    }
+
     public class Chapter
     {
         public int Id { get; set; }
         [DisplayName("Titre")]
         [DisplayFormat(DataFormatString = "{0,20}")]
         public string BookTitle { get; set; }
+        [Required]
         public int BookId { get; set; }
         [DisplayName("No chapitre")]
         public int ChapterNumber { get; set; }

@@ -20,8 +20,12 @@ namespace WebApplication2.Models
         [DisplayName("Nombres de chapitres")]
         public int ChapterCount { get; set; }
         [DisplayName("Date de creation")]
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTimeOffset CreationTime { get; set; }
         [DisplayName("Derniere modification")]
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTimeOffset LastModificationDate { get; set; }
         [DisplayName("Couverture")]
         public string FrontImage { get; set; }

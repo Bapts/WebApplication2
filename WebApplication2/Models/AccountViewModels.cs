@@ -70,7 +70,7 @@ namespace WebApplication2.Models
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "Vous devez renseigner votre Email.")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Vous devez renseigner une addrese email valide")]
         [Display(Name = "Courrier électronique")]
         public string Email { get; set; }
 
@@ -97,15 +97,14 @@ namespace WebApplication2.Models
         [Display(Name = "Genre")]
         public int Gender { get; set; }
 
-
-        [Required(ErrorMessage = "Vous devez renseigner votre date de naissance.")]
+        [Required]
+        [DataType(DataType.Date)]
         [Display(Name= "Date de naissance")]
         public DateTimeOffset BirthDate { get; set; }
 
         [Required]
         [Display(Name = "Date d'inscrption")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",
-               ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.DateTime)]
         public DateTimeOffset RegisterTime { get; set; }
 
