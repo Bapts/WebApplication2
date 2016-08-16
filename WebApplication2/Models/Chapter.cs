@@ -4,13 +4,14 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace WebApplication2.Models
 {
     public class ChapterBookController
     {
         public Chapter Chapter { get; set; }
-        public List<Book> BooksList { get; set; }
+        public IEnumerable<SelectListItem> BooksList { get; set; }
     }
 
     public class Chapter

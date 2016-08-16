@@ -42,11 +42,25 @@ namespace WebApplication2.Controllers
         public ActionResult Create(int? id)
         {
             var viewModel = new ChapterBookController();
+            var books = db.Books.ToList();
             if (id != null)
-                _bookId = (int) id;
-            viewModel.Chapter = new Chapter {BookId = _bookId};
-            viewModel.BooksList = db.Books.ToList();
+            {
+                _bookId = (int)id;
+            }
+            viewModel.Chapter = new Chapter { BookId = _bookId };
+            viewModel.BooksList = CreateSelectList(books);
             return View(viewModel);
+        }
+
+        private IEnumerable<SelectListItem> CreateSelectList(IEnumerable<Book> books)
+        {
+            var list = books.Select(book => new SelectListItem
+            {
+                Text = book.Title, Value = book.BookId.ToString(), Selected = book.BookId == _bookId
+            }).ToList();
+            return _bookId != 0 ? 
+                (new SelectList(list, "Value", "Text", list.First(x => x.Value == _bookId.ToString()))) : 
+                (new SelectList(list, "Value", "Text"));
         }
 
         // POST: Chapters/Create
@@ -63,8 +77,9 @@ namespace WebApplication2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(chapter);
+            var books = db.Books.ToList();
+            var model = new ChapterBookController {Chapter = chapter, BooksList = CreateSelectList(books)};
+            return View(model);
         }
 
         public Chapter InitChapter(Chapter chapter)

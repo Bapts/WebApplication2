@@ -4,8 +4,7 @@
 
 @{
     ViewBag.Title = "Creation de chapitre";
-    var books = Model.BooksList;
-    var listItems = new SelectList(books, "BookId", "Title");
+    
 
     //var listItems = books.Select(book => new ListItem(book.Title, book.Title));
 }
@@ -47,12 +46,23 @@
             var str = document.getElementById("ContentId").value;
             document.getElementById("CountWord").value = str.replace(/\s+/g, ' ').replace(/'/g, ' ').trim().split(' ').length;
         }
+        var list = document.getElementById("DropDownBooksList");
+        setSelectedIndex(list, @Model.Chapter.BookId);
+        function setSelectedIndex(list, v) {
+            for (var i = 0; i < list.options.length; i++) {
+                if (list.options[i].value === v) {
+                    console.log("value = " + value);
+                    list.options[i].selected = true;
+                    return;
+                }
+            }
+        }
     </script>
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <h4>Chapitre</h4>
        
-        @Html.DropDownListFor(model => model.Chapter.BookId, listItems, "-- Choisir Livre --", new {@class = "form-control"})
+        @Html.DropDownListFor(model => model.Chapter.BookId, Model.BooksList, "-- Choisir Livre --", new {@class = "form-control", id= "DropDownBooksList"})
 
 
         <hr />
