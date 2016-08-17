@@ -31,5 +31,30 @@ namespace WebApplication2.Models
         public string FrontImage { get; set; }
         [DisplayName("Contenu")]
         public string Content { get; set; }
+        [Required]
+        [DisplayName("Nombre de contribution")]
+        public int NbrContribution { get; set; }
+        [Required]
+        [DisplayName("Etat")]
+        public int State { get; set; }
+        [Required]
+        [DisplayName("Genre")]
+        public int Genre { get; set; }
+
+        public enum EGenre
+        {
+            Comte,
+            Fiction,
+            Policier,
+            Theatre,
+        }
+
+        public enum EEtat
+        {
+            Create,
+            Actif,
+            Inactif,
+            Finis
+        }
     }
 }

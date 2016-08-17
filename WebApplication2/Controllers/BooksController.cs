@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using WebApplication2.Models;
+using PagedList;
 
 namespace WebApplication2.Controllers
 {
@@ -16,9 +17,54 @@ namespace WebApplication2.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Books
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Books.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewBag.CreationDateSortParm = sortOrder == "CreationDate" ? "creation_date_desc" : "CreationDate";
+            ViewBag.ModificationDateSortParm = sortOrder == "ModificationDate" ? "modification_date_desc" : "ModificationDate";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            var books = from b in db.Books
+                           select b;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(s => s.Title.Contains(searchString)
+                                       || s.Summary.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    books = books.OrderByDescending(s => s.Title);
+                    break;
+                case "CreationDate":
+                    books = books.OrderBy(s => s.CreationTime);
+                    break;
+                case "creation_date_desc":
+                    books = books.OrderByDescending(s => s.CreationTime);
+                    break;
+                case "ModificationDate":
+                    books = books.OrderByDescending(s => s.LastModificationDate);
+                    break;
+                case "modification_date_desc":
+                    books = books.OrderByDescending(s => s.LastModificationDate);
+                    break;
+                default:
+                    books = books.OrderBy(s => s.Title);
+                    break;
+            }
+            var pageSize = 10;
+            var pageNumber = (page ?? 1);
+            return View(books.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Books/Details/5
